@@ -1,0 +1,6 @@
+COVID19MEXICO2020.csv filter=lfs diff=lfs merge=lfs -text
+COVID19MEXICO2021.csv filter=lfs diff=lfs merge=lfs -text
+COVID19MEXICO2022.csv filter=lfs diff=lfs merge=lfs -text
+COVID19MEXICO2023.csv filter=lfs diff=lfs merge=lfs -text
+COVID19MEXICO2024.csv filter=lfs diff=lfs merge=lfs -text
+DATASET_MAESTRO_COVID_2020_2026.csv filter=lfs diff=lfs merge=lfs -text

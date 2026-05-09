@@ -1,10 +1,15 @@
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # 1. Cargar tus datos
 try:
-    df = pd.read_csv("DATASET_MAESTRO_COVID_2020_2026.csv")
+    csv_path = Path("DATASET_MAESTRO_COVID_2020_2026.csv")
+    if not csv_path.exists():
+        csv_path = Path("DATASET_MAESTRO_COVID_2020_2026.csv.gz")
+
+    df = pd.read_csv(csv_path)
     print("Dataset cargado correctamente.")
 except FileNotFoundError:
     print("Error: No se encontró el archivo.")

@@ -2,13 +2,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
+from pathlib import Path
 
 # 1. Cargar el dataset nuevo
 try:
-    df = pd.read_csv("covid_filtrado.csv", low_memory=False)
-    print("Dataset 'covid_filtrado' cargado correctamente.")
+    csv_path = Path("covid_filtrado.csv")
+    if not csv_path.exists():
+        csv_path = Path("covid_filtrado.csv.gz")
+
+    df = pd.read_csv(csv_path, low_memory=False)
+    print(f"Dataset '{csv_path.name}' cargado correctamente.")
 except FileNotFoundError:
-    print("Error: No se encontró el archivo 'covid_filtrado.csv'")
+    print("Error: No se encontró el archivo 'covid_filtrado.csv' ni 'covid_filtrado.csv.gz'")
     exit()
 
 # 2. Preprocesamiento de Variables

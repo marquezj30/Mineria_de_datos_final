@@ -1,11 +1,23 @@
 import pandas as pd
 import glob
 import os
+from pathlib import Path
+
+if Path("DATASET_MAESTRO_COVID_2020_2026.csv.gz").exists():
+    print("El dataset limpio comprimido ya existe: DATASET_MAESTRO_COVID_2020_2026.csv.gz")
+    print("Los scripts de analisis pueden leerlo directamente; no es necesario regenerarlo.")
+    raise SystemExit(0)
 
 # 1. Identificar todos los archivos que empiecen con 'COVID19MEXICO'
 # Asegúrate de ejecutar este script en la misma carpeta donde están tus CSVs
 archivos = glob.glob("COVID19MEXICO20*.csv")
 archivos.sort() # Los ordena de 2020 a 2026
+
+if not archivos:
+    raise FileNotFoundError(
+        "No se encontraron archivos COVID19MEXICO20*.csv. "
+        "Para regenerar el dataset maestro se necesitan los CSV originales."
+    )
 
 lista_df_limpios = []
 

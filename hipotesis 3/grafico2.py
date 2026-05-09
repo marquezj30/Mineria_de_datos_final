@@ -1,9 +1,14 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from lifelines import KaplanMeierFitter
+from pathlib import Path
 
 # 1. Cargar datos
-df = pd.read_csv("covid_filtrado.csv", low_memory=False)
+csv_path = Path("covid_filtrado.csv")
+if not csv_path.exists():
+    csv_path = Path("covid_filtrado.csv.gz")
+
+df = pd.read_csv(csv_path, low_memory=False)
 
 # 2. Preparar los tiempos (Días desde ingreso hasta defunción)
 df['FECHA_INGRESO'] = pd.to_datetime(df['FECHA_INGRESO'])

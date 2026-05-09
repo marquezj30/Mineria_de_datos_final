@@ -1,9 +1,14 @@
 import pandas as pd
 import plotly.express as px
 import requests
+from pathlib import Path
 
 # 1. Cargar datos
-df = pd.read_csv("DATASET_MAESTRO_COVID_2020_2026.csv")
+csv_path = Path("DATASET_MAESTRO_COVID_2020_2026.csv")
+if not csv_path.exists():
+    csv_path = Path("DATASET_MAESTRO_COVID_2020_2026.csv.gz")
+
+df = pd.read_csv(csv_path)
 
 # 2. Descargar el GeoJSON
 url = "https://raw.githubusercontent.com/angelnmara/geojson/master/mexicoHigh.json"

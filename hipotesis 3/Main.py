@@ -1,8 +1,14 @@
 import pandas as pd
 import time
 import os
+from pathlib import Path
 
 inicio = time.time()
+
+if Path("covid_filtrado.csv.gz").exists():
+    print("El dataset filtrado comprimido ya existe: covid_filtrado.csv.gz")
+    print("Los scripts grafico1.py, grafico2.py y grafico3.py pueden leerlo directamente.")
+    raise SystemExit(0)
 
 # =========================
 # ARCHIVOS
@@ -14,6 +20,13 @@ archivos = [
     "COVID19MEXICO2023.csv",
     "COVID19MEXICO2024.csv"
 ]
+
+faltantes = [archivo for archivo in archivos if not Path(archivo).exists()]
+if faltantes:
+    raise FileNotFoundError(
+        "No se encontraron los CSV originales necesarios para regenerar covid_filtrado.csv: "
+        + ", ".join(faltantes)
+    )
 
 # =========================
 # COLUMNAS NECESARIAS

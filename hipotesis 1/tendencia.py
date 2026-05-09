@@ -1,7 +1,12 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
 
-df = pd.read_csv("DATASET_MAESTRO_COVID_2020_2026.csv")
+csv_path = Path("DATASET_MAESTRO_COVID_2020_2026.csv")
+if not csv_path.exists():
+    csv_path = Path("DATASET_MAESTRO_COVID_2020_2026.csv.gz")
+
+df = pd.read_csv(csv_path)
 
 # Calcular mortalidad anual para personas con al menos una comorbilidad
 df['TIENE_COMORBILIDAD'] = ((df['DIABETES'] == 1) | (df['HIPERTENSION'] == 1) | (df['OBESIDAD'] == 1)).astype(int)

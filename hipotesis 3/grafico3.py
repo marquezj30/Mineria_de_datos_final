@@ -1,9 +1,14 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # 1. Cargar datos
-df = pd.read_csv("covid_filtrado.csv", low_memory=False)
+csv_path = Path("covid_filtrado.csv")
+if not csv_path.exists():
+    csv_path = Path("covid_filtrado.csv.gz")
+
+df = pd.read_csv(csv_path, low_memory=False)
 
 # 2. Filtrar solo pacientes que FUERON intubados (INTUBADO == 1)
 # Queremos ver el perfil de edad de quienes ocuparon el recurso crítico

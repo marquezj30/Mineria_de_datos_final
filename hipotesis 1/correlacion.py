@@ -1,9 +1,14 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # Cargar datos limpios
-df = pd.read_csv("DATASET_MAESTRO_COVID_2020_2026.csv")
+csv_path = Path("DATASET_MAESTRO_COVID_2020_2026.csv")
+if not csv_path.exists():
+    csv_path = Path("DATASET_MAESTRO_COVID_2020_2026.csv.gz")
+
+df = pd.read_csv(csv_path)
 
 # Crear una figura con dos subgráficos (2020 y 2024)
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
